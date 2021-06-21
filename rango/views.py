@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.shortcuts import redirect
 from django.http import HttpResponse 
 from django.urls import reverse
-from django.contrib.auth import authenticate, login, logout
+#from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from rango.models import Category
 from rango.models import Page
@@ -130,13 +130,14 @@ def add_page(request, category_name_slug):
     context_dict = {'form': form, 'category': category}
     return render(request, 'rango/add_page.html', context=context_dict)
 
+'''
 def register(request):
     # A boolean value for telling the template
     # whether the registration was successful.
     # Set to False initially. Code changes value to 
     # True when registration succeeds.
     registered = False
-    
+ 
     # If it's a HTTP POST, we're interested in processing form data.
     if request.method == 'POST':
         # Attempt to grab information from the raw form information. 
@@ -229,12 +230,14 @@ def user_login(request):
         # No context variables to pass to the template system, hence the 
         # blank dictionary object...
         return render(request, 'rango/login.html')
+'''
 
 @login_required
 def restricted(request):
     context_dict={'boldmessage':"Since you're logged in, you can see this text!"}
     return render(request, 'rango/restricted.html', context=context_dict)
 
+'''
 # Use the login_required() decorator to ensure only those logged in can 
 # access the view.
 @login_required
@@ -243,6 +246,7 @@ def user_logout(request):
     logout(request)
     # Take the user back to the homepage.
     return redirect(reverse('rango:index'))
+'''
 
 # A helper method
 def get_server_side_cookie(request, cookie, default_val=None): 
