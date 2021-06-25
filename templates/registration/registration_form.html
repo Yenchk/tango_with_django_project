@@ -5,13 +5,46 @@
 {% endblock %}
 
 {% block body_block %}
-<h1>Register Here</h1>
+<div class="jumbotron p-1">
+	<div class="container">
+        <h1 class="jumbotron-heading">Register Here</h1>
+    </div>
+</div>
+<div class="container">
+	<div class="row">
+	<div class="form-group">
+    <form role="form" method="post" action=".">
+	    {% csrf_token %}
+        <div class="form-group">
+        
+        <p class="required"><label class="required" for="id_username">Username:</label>
+        <input class="form-control" id="id_username" maxlength="30" type="text" name="username" />
+        <span class="helptext">
+        	Required. 30 character or fewer.
+        	Letters, digits and @/./+/-/_ only.
+        </span>
+        </p>
+        
+        <p class="required"><label class="required" for="id_email">E-mail:</label>
+        <input class="form-control" id="id_email" type="email" name="email" />
+        </p>
+        
+        <p class="required"><label class="required" for="id_password1">Password:</label>
+        <input class="form-control" id="id_password1" type="password" name="password1" />
+        </p>
 
-<form method="post" action=".">
-	{% csrf_token %}
+        <p class="required"><label class="required" for="id_password2">Password confirmation:</label>
+        <input class="form-control" id="id_password2" type="password" name="password2" />
+        <span class="helptext">
+            Enter the same password as before, for verificataion.
+        </span>
+        </p>
 
-	{{ form.as_p }}
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    </div> 
+	</div>
+</div>
 
-	<input type="submit" value="Register" />
-</form>
 {% endblock %}
