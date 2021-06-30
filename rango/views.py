@@ -10,6 +10,7 @@ from rango.forms import CategoryForm
 from rango.forms import PageForm
 from rango.forms import UserForm, UserProfileForm
 from datetime import datetime
+from rango.bing_search import run_query
 
 def index(request):
     # Query the database for a list of ALL categories currently stored.
@@ -280,3 +281,15 @@ def visitor_cookie_handler(request):
     # Update/set the visits cookie
     request.session['visits'] = visits
 
+def search(request):
+    context_dic = {}
+        
+    if request.method == 'POST':
+        query = request.POST['query'].strip()
+        if query:
+            # Run our Bing function to get the results list!
+            result_list = run_query(query)
+
+    context_dic['result_list'] = result_list
+    context_dic['query'] = query
+    return render(request, 'rango/search.html', context=context_dic)
