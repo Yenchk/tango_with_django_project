@@ -12,8 +12,10 @@ urlpatterns = [
     path('category/<slug:category_name_slug>/add_page/', 
          views.add_page, name='add_page'),
     path('restricted/', views.restricted, name='restricted'),
-    path('search/', views.search, name='search'),
-
+    #path('search/', views.search, name='search'),
+    path('goto/', views.goto_url, name='goto'),
+    path('register_profile/', views.register_profile, name='register_profile'),
+    path('profile/', views.profile, name='profile'),
     #path('register/', views.register, name='register'),
     #path('login/', views.user_login, name='login'),
     #path('logout/', views.user_logout, name='logout'),
