@@ -56,7 +56,7 @@ def show_category(request, category_name_slug):
 
         # Retrieve all of the associated pages.
         # The filter() will return a list of page objects or an empty list. 
-        pages = Page.objects.filter(category=category)
+        pages = Page.objects.filter(category=category).order_by('-views')
         
         # Adds our results list to the template context under name pages.
         context_dict['pages'] = pages
@@ -289,7 +289,7 @@ def visitor_cookie_handler(request):
         
     # Update/set the visits cookie
     request.session['visits'] = visits
-
+'''
 def search(request):
     context_dic = {}
         
@@ -302,22 +302,22 @@ def search(request):
             context_dic['query'] = query
 
     return render(request, 'rango/search.html', context=context_dic)
+'''
 
 def goto_url(request):
-    page_id = None
-    url = '/rango/'
     if request.method == 'GET':
-        #if page_id in request.GET:
             page_id = request.GET.get('page_id')
             try:
                 page = Page.objects.get(id=page_id)
-                page.views = page.views + 1
-                page.save()
-                url = page.url
-            except:
-                pass
+            except Page.DoesNotExist:
+                return redirect(reverse('rango:index'))
+                
+            page.views = page.views + 1
+            page.save()
+            
+            return redirect(page.url)
 
-    return redirect(url)
+    return redirect(reverse('ranog:index'))
     
 @login_required
 def register_profile(request):
