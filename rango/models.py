@@ -26,7 +26,7 @@ class Page(models.Model):
 
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     title = models.CharField(max_length=TITLE_MAX_LENGTH)
-    url = models.URLField()
+    url = models.URLField() 
     views = models.IntegerField(default=0)
     
     def __str__(self):
@@ -39,6 +39,7 @@ class UserProfile(models.Model):
     # The additional attributes we wish to include.
     website = models.URLField(blank=True)
     picture = models.ImageField(upload_to='profile_images', blank=True)
+    intro = models.CharField(max_length=50, blank=True)
 
     def __str__(self):
         return self.user.username

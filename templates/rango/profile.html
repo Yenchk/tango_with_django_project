@@ -2,31 +2,40 @@
 {% load staticfiles %}
 
 {% block title_block %}
-    Profile
+    Profile for {{ selected_user.username }}
 {% endblock %}
 
 {% block body_block %}
 <div class="jumbotron p-4">
 	<div class="container">
-	    <h1 class="jumbotron-heading">Profile</h1>
+	    <h1 class="jumbotron-heading">{{ selected_user.username }}'s Profile</h1>
 	</div>
 </div>
 
-<div>
-	<h2>{{ user.username }}</h2>
-	<p>Email: {{ user.email }}</p>
+<div class="container">
+	<div class="row">
+		<img src="{{ MEDIA_URL }}{{ user_profile.picture }}"
+		    width="288"
+		    height="288"
+		    alt="{{ selected_user.username }}'s profile image" />
+		<br />
+		<div>
+			{% if selected_user == user %}
+			<form method="post" action="." enctype="multipart/form-data">
+				{% csrf_token %}
+				{{ form.as_p }}
 
-	{% if userprofile %}
-	    <p>Website: <a href="{{ userprofile.website }}">{{userprofile.website}}</a></p>
-	    <br/>
-	{% if userprofile.picture %}
-	    <img src="{{ userprofile.picture.url }}" />
-	{% endif %}
-	{% endif %}
-
+				<input type="submit" value="Updata">
+	        </form>
+	        {% else %}
+	        <p>
+	    	    <strong>Website:</strong>
+	    	    <a href="{{ user_profile.website }}">{{ user_profile.website }}</a>
+	    	    <br/>
+	    	    <strong>Intro: {{ user_profile.intro }}</strong>
+	        </p>
+	        {% endif %}
+	    </div>
+	</div>
 </div>
-
-
-
-
 {% endblock %}
