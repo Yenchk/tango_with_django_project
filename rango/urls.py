@@ -18,6 +18,9 @@ urlpatterns = [
     path('register_profile/', views.register_profile, name='register_profile'),
     path('profile/<username>/', views.ProfileView.as_view(), name='profile'),
     path('profiles/', views.ListProfilesView.as_view(), name='list_profiles'),
+    path('like_category/', views.LikeCategoryView.as_view(), name='like_category'),
+    path('suggest/', views.CategorySuggestionView.as_view(), name='suggest'),
+
     #path('register/', views.register, name='register'),
     #path('login/', views.user_login, name='login'),
     #path('logout/', views.user_logout, name='logout'),
