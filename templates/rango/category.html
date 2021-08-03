@@ -77,6 +77,13 @@
                         {{ result.summary|safe|escape }}
                     </p>
                     </div>
+                    <button class="btn btn-info btn-sm rango-page-add" type="button"
+                            data-categoryid="{{ category.id }}"
+                            data-title="{{ result.title }}"
+                            data-url="{{ result.link }}">
+                      Add
+                    </button>
+
                 {% endfor %}
             </div>
             {% endif %}
