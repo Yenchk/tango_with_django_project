@@ -51,6 +51,11 @@ class IndexViewTests(TestCase):
         num_categories = len(response.context['categories'])
         self.assertEquals(num_categories, 3)
 
+class PageMethodTests(TestCase):
+    def test_last_visit_is_not_future(self):
+        '''
+        Last visit time should not be the future time.
+        '''        
         
 
 def add_category(name, views=0, likes=0):

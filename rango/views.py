@@ -15,6 +15,7 @@ from django.views import View
 from django.utils.decorators import method_decorator
 from django.contrib.auth.models import User
 from rango.models import UserProfile
+from django.utils import timezone
 
 def index(request):
     # Query the database for a list of ALL categories currently stored.
@@ -397,7 +398,7 @@ def search(request):
             context_dic['query'] = query
 
     return render(request, 'rango/search.html', context=context_dic)
-'''
+
 
 def goto_url(request):
     if request.method == 'GET':
@@ -413,7 +414,23 @@ def goto_url(request):
             return redirect(page.url)
 
     return redirect(reverse('ranog:index'))
-    
+'''
+
+class GotoView(View):
+    def get(self, request):
+        page_id = request.GET.get('page_id')
+
+        try:
+            selected_page = Page.objects.get(id=page_id)
+        except Page.DoesNotExist:
+            return redirect(reverse('rango:index'))
+
+        selected_page.views = selected_page.views + 1
+        selected_page.last_visit = timezone.now()
+        selected_page.save()
+
+        return redirect(selected_page.url)
+
 @login_required
 def register_profile(request):
     form = UserProfileForm
