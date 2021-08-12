@@ -27,7 +27,7 @@ SECRET_KEY = 'k0e+)ja@^%e6iuwh)_9d0-44zeqyxuv$en1(h(@$)qm*%0e*f8'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['Yenchk.pythonanywhere.com']
 
 MEDIA_ROOT = MEDIA_DIR
 MEDIA_URL = '/media/'
