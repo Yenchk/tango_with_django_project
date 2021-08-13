@@ -26,7 +26,7 @@ key = None
 with open('secret.key') as f:
     key = f.read().strip()
 
-SECRET_KEY = key
+SECRET_KEY = 'k0e+)ja@^%e6iuwh)_9d0-44zeqyxuv$en1(h(@$)qm*%0e*f8'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
